@@ -1,0 +1,125 @@
+/* Imole mascot. Moods switch by class: .imole--idle | listening | thinking | talking | happy | sleep | alert */
+.imole { display: inline-block; line-height: 0; flex-shrink: 0; }
+.imole svg { width: 100%; height: 100%; overflow: visible; }
+.imole g, .imole path, .imole rect, .imole circle, .imole ellipse { transform-box: view-box; }
+
+.im-float { animation: im-bob 3.4s ease-in-out infinite; }
+.im-shadow { transform-origin: 100px 219px; animation: im-shadow 3.4s ease-in-out infinite; }
+.im-rays { transform-origin: 100px 18px; animation: im-spin 14s linear infinite; }
+.im-sun { transform-origin: 100px 18px; animation: im-pulse 2.8s ease-in-out infinite; }
+.im-look { transform: translate(var(--im-lx, 0), var(--im-ly, 0)); transition: transform 0.18s ease-out; }
+.im-eyes-open { transform-origin: 100px 130px; animation: im-blink 5s infinite; }
+.im-panel { transform-origin: 100px 91px; transition: transform 0.3s ease; }
+.im-arm-l { transform-origin: 31px 134px; transition: transform 0.3s ease; }
+.im-arm-r { transform-origin: 168px 134px; transition: transform 0.3s ease; }
+
+.im-cell { fill: #39406a; transition: fill 0.3s; }
+.im-cell.on { fill: #6fdc8c; }
+
+/* Hidden unless the mood asks for them */
+.im-eyes-happy, .im-eyes-closed, .im-mouth-talk, .im-mouth-o,
+.im-sparkles, .im-zzz, .im-dots, .im-alert, .im-ring { display: none; }
+
+/* listening: hat tilts, a soft ring pulses */
+.imole--listening .im-panel { transform: rotate(-5deg); }
+.imole--listening .im-ring { display: inline; transform-origin: 100px 128px; animation: im-ring 1.8s ease-out infinite; }
+.imole--listening .im-arm-r { transform: rotate(-12deg); }
+
+/* thinking: sun spins fast, thought bubbles, battery cells cycle */
+.imole--thinking .im-rays { animation-duration: 2.2s; }
+.imole--thinking .im-dots { display: inline; }
+.imole--thinking .im-dots circle { animation: im-dot 1.2s ease-in-out infinite; }
+.imole--thinking .im-dots circle:nth-child(2) { animation-delay: 0.2s; }
+.imole--thinking .im-dots circle:nth-child(3) { animation-delay: 0.4s; }
+.imole--thinking .im-cell { animation: im-charge 1.2s ease-in-out infinite; }
+.imole--thinking .im-cell:nth-of-type(2) { animation-delay: 0.15s; }
+.imole--thinking .im-cell:nth-of-type(3) { animation-delay: 0.3s; }
+.imole--thinking .im-cell:nth-of-type(4) { animation-delay: 0.45s; }
+.imole--thinking .im-arm-l { transform: rotate(18deg); }
+
+/* talking */
+.imole--talking .im-mouth { display: none; }
+.imole--talking .im-mouth-talk { display: inline; transform-origin: 100px 151px; animation: im-talk 0.26s ease-in-out infinite alternate; }
+.imole--talking .im-arm-r { animation: im-gesture 1.4s ease-in-out infinite; }
+
+/* happy */
+.imole--happy .im-eyes-open { display: none; }
+.imole--happy .im-eyes-happy { display: inline; }
+.imole--happy .im-sparkles { display: inline; }
+.imole--happy .im-sparkles path { transform-origin: center; transform-box: fill-box; animation: im-twinkle 1.1s ease-in-out infinite; }
+.imole--happy .im-sparkles path:nth-child(2) { animation-delay: 0.3s; }
+.imole--happy .im-sparkles path:nth-child(3) { animation-delay: 0.6s; }
+.imole--happy .im-arm-r { animation: im-wave 0.9s ease-in-out infinite; }
+.imole--happy .im-float { animation: im-hop 0.9s ease-in-out infinite; }
+
+/* sleep */
+.imole--sleep .im-eyes-open, .imole--sleep .im-mouth { display: none; }
+.imole--sleep .im-eyes-closed, .imole--sleep .im-mouth-o { display: inline; }
+.imole--sleep .im-mouth-o { transform-origin: 100px 151px; transform: scale(0.7); }
+.imole--sleep .im-zzz { display: inline; }
+.imole--sleep .im-zzz text { animation: im-zzz 2.6s ease-in-out infinite; }
+.imole--sleep .im-zzz text:nth-child(2) { animation-delay: 0.4s; }
+.imole--sleep .im-zzz text:nth-child(3) { animation-delay: 0.8s; }
+.imole--sleep .im-float { animation-duration: 6s; }
+.imole--sleep .im-rays { animation-play-state: paused; }
+.imole--sleep .im-sun { animation: none; opacity: 0.6; }
+.imole--sleep .im-panel { transform: rotate(4deg); }
+
+/* alert */
+.imole--alert .im-alert { display: inline; transform-origin: 166px 40px; animation: im-pop 0.9s ease-in-out infinite; }
+.imole--alert .im-mouth { display: none; }
+.imole--alert .im-mouth-o { display: inline; }
+.imole--alert .im-float { animation: im-shake 0.5s ease-in-out 2, im-bob 3.4s 1s ease-in-out infinite; }
+
+@keyframes im-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes im-shadow { 0%, 100% { transform: scaleX(1); opacity: 1; } 50% { transform: scaleX(0.86); opacity: 0.7; } }
+@keyframes im-spin { to { transform: rotate(360deg); } }
+@keyframes im-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+@keyframes im-blink { 0%, 93%, 100% { transform: scaleY(1); } 95.5% { transform: scaleY(0.08); } }
+@keyframes im-ring { from { transform: scale(0.82); opacity: 0.9; } to { transform: scale(1.08); opacity: 0; } }
+@keyframes im-dot { 0%, 100% { opacity: 0.25; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-3px); } }
+@keyframes im-charge { 0%, 100% { fill: #39406a; } 50% { fill: #6fdc8c; } }
+@keyframes im-talk { from { transform: scaleY(0.35); } to { transform: scaleY(1.05); } }
+@keyframes im-gesture { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-16deg); } }
+@keyframes im-wave { 0%, 100% { transform: rotate(-10deg); } 50% { transform: rotate(-150deg); } }
+@keyframes im-hop { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-9px); } 60% { transform: translateY(-9px); } }
+@keyframes im-twinkle { 0%, 100% { transform: scale(0.5); opacity: 0.3; } 50% { transform: scale(1.15); opacity: 1; } }
+@keyframes im-zzz { 0% { opacity: 0; transform: translate(0, 4px); } 40% { opacity: 1; } 100% { opacity: 0; transform: translate(6px, -8px); } }
+@keyframes im-pop { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.14); } }
+@keyframes im-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-3px) rotate(-2deg); } 75% { transform: translateX(3px) rotate(2deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .imole *, .imole *::before { animation: none !important; transition: none !important; }
+}
+
+/* ---------- Assistant dock ---------- */
+.dock { position: fixed; right: 22px; bottom: 18px; z-index: 40; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; pointer-events: none; }
+.dock > * { pointer-events: auto; }
+.dock-fab { position: relative; border: 0; background: none; padding: 0; filter: drop-shadow(0 8px 14px rgba(26, 25, 21, 0.18)); transition: transform 0.2s; }
+.dock-fab:hover { transform: translateY(-2px); }
+.dock-hello { max-width: 236px; background: var(--sheet); border: 1px solid var(--line); border-radius: 12px 12px 4px 12px; padding: 10px 12px; box-shadow: var(--shadow-pop); font-size: 13px; color: var(--ink-2); animation: dock-in 0.3s ease; }
+.dock-hello b { color: var(--ink); }
+.dock-panel { width: 384px; height: min(600px, calc(100vh - 130px)); display: flex; flex-direction: column; overflow: hidden; border-radius: 16px; box-shadow: var(--shadow-pop); animation: dock-in 0.2s ease; }
+.dock-head { display: flex; align-items: center; gap: 10px; padding: 10px 12px 10px 8px; border-bottom: 1px solid var(--line); background: var(--sheet); }
+.dock-head b { display: block; font-size: 14px; letter-spacing: -0.01em; }
+.dock-head span:not(.imole) { color: var(--muted); font-size: 12.5px; }
+.dock-msgs { flex: 1; overflow: auto; padding: 16px 14px; display: flex; flex-direction: column; gap: 8px; background: var(--subtle); }
+.dmsg { max-width: 86%; padding: 9px 12px; border-radius: 12px; white-space: pre-wrap; line-height: 1.5; font-size: 13.5px; }
+.dmsg.user { align-self: flex-end; background: var(--ink); color: #fff; border-bottom-right-radius: 4px; }
+.dmsg.bot { align-self: flex-start; background: var(--sheet); border: 1px solid var(--line); border-bottom-left-radius: 4px; }
+.dmsg.err { display: block; margin: 0; background: var(--red-soft); color: var(--red-ink); border-color: #f3d2ce; font-weight: 400; }
+.dact { align-self: flex-start; display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500; padding: 3px 8px; border-radius: 6px; background: var(--green-soft); color: var(--green-ink); }
+.dact.fail { background: var(--red-soft); color: var(--red-ink); }
+.typing { display: inline-flex; gap: 4px; padding: 12px 14px; }
+.typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: im-dot 1s infinite; }
+.typing i:nth-child(2) { animation-delay: 0.15s; }
+.typing i:nth-child(3) { animation-delay: 0.3s; }
+.dock-sugg { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 14px 12px; background: var(--subtle); }
+.dock-sugg button { border: 1px solid var(--line-2); background: var(--sheet); border-radius: 7px; padding: 5px 10px; font-size: 12.5px; font-weight: 500; color: var(--ink-2); transition: border-color 0.12s, background 0.12s; }
+.dock-sugg button:hover { border-color: var(--sun-line); background: var(--sun-soft); color: var(--sun-ink); }
+.dock-input { display: flex; gap: 8px; padding: 10px; border-top: 1px solid var(--line); background: var(--sheet); }
+@keyframes dock-in { from { opacity: 0; transform: translateY(8px) scale(0.98); } to { opacity: 1; transform: none; } }
+@media (max-width: 560px) {
+  .dock { right: 12px; bottom: 12px; left: 12px; }
+  .dock-panel { width: 100%; height: calc(100vh - 120px); }
+}

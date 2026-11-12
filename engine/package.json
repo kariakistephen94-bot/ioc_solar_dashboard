@@ -1,0 +1,21 @@
+{
+  "name": "oic-solar-engine",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "WhatsApp lead engine for OIC Solar: Nigerian lead discovery, 4 WhatsApp accounts, follow-ups, OpenAI reply agent. Supabase is the only database.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test --no-warnings test/*.test.js",
+    "harvest": "node scripts/harvest.mjs"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "7.0.0-rc14",
+    "pino": "^9.5.0",
+    "qrcode": "^1.5.4"
+  }
+}
